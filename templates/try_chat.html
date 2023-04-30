@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Knock - Logistics Company Welcomes you</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js" integrity="sha512-aMGMvNYu8Ue4G+fHa359jcPb1u+ytAF+P2SCb+PxrjCdO3n3ZTxJ30zuH39rimUggmTwmh2u7wvQsDTHESnmfQ==" crossorigin="anonymous"></script>
+    
+  
+    <!-- Favicon -->
+    <link href="../static/img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- somemore bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    
+    <!-- flask test -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js" integrity="sha512-aMGMvNYu8Ue4G+fHa359jcPb1u+ytAF+P2SCb+PxrjCdO3n3ZTxJ30zuH39rimUggmTwmh2u7wvQsDTHESnmfQ==" crossorigin="anonymous"></script>
+    
+
+    <script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+  var socket = io();
+  socket.emit('join');
+  socket.on('my_response', function(msg, cb) {
+      var userImage = msg.name === "User1" ? "https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp" : "https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-8.webp";
+      var messageTemplate = '<li class="d-flex justify-content-between mb-4"><img src="' + userImage + '" alt="avatar" class="rounded-circle d-flex align-self-start me-3 shadow-1-strong" width="60"><div class="card"><div class="card-header d-flex justify-content-between p-3"><p class="fw-bold mb-0">' + msg.name + '</p><p class="text-muted small mb-0"><i class="far fa-clock"></i> just now</p></div><div class="card-body"><p class="mb-0">' + msg.data + '</p></div></div></li>';
+      $('#send_room .list-unstyled').prepend(messageTemplate);
+      if (cb) cb();
+  });
+  $('#send_message').click(function(event) {
+      socket.emit('my_room_event', {data: $('#textAreaExample2').val()});
+      $('#textAreaExample2').val('');
+  });
+  $('#disconnect').click(function(event) {
+      socket.emit('disconnect_request');
+      location.href = location.origin + '/chat'
+  });
+});
+  </script>
+
+  
+</head>
+    <body>
+      <!-- Topbar Start -->
+    <div class="container-fluid bg-dark">
+      <div class="row py-2 px-lg-5">
+          <div class="col-lg-6 text-center text-lg-left mb-2 mb-lg-0">
+              <div class="d-inline-flex align-items-center text-white">
+                  <small><i class="fa fa-phone-alt mr-2"></i>+1 (812)-553-1234</small>
+                  <small class="px-3">|</small>
+                  <small><i class="fa fa-envelope mr-2"></i>team8@iu.edu</small>
+              </div>
+          </div>
+          <div class="col-lg-6 text-center text-lg-right">
+              <div class="d-inline-flex align-items-center">
+                  <a class="text-white px-2" href="">
+                      <i class="fab fa-facebook-f"></i>
+                  </a>
+                  <a class="text-white px-2" href="">
+                      <i class="fab fa-twitter"></i>
+                  </a>
+                  <a class="text-white px-2" href="">
+                      <i class="fab fa-linkedin-in"></i>
+                  </a>
+                  <a class="text-white px-2" href="">
+                      <i class="fab fa-instagram"></i>
+                  </a>
+                  <a class="text-white pl-2" href="">
+                      <i class="fab fa-youtube"></i>
+                  </a>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- Topbar End -->
+
+  <!-- Navbar Start -->
+  <div class="container-fluid p-0">
+    <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-lg-5">
+        <a href="index.html" class="navbar-brand ml-lg-3">
+            <h1 class="m-0 display-5 text-uppercase text-primary"><i class="fa fa-truck mr-2"></i>Faster</h1>
+        </a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
+            <div class="navbar-nav m-auto py-0">
+                <a href="{{ url_for('home') }}" class="nav-item nav-link">Home</a>
+                <!-- <a href="{{ url_for('location') }}" class="nav-item nav-link">Location</a>
+                <a href="{{ url_for('driver_orders', t='Incomplete') }}" class="nav-item nav-link">Deliveries</a> -->
+                <a href="{{ url_for('review') }}" class="nav-item nav-link">Blog</a>
+                <a href="{{ url_for('view_reviews') }}" class="nav-item nav-link">Review</a>
+                <!-- <a href="{{ url_for('search') }}" class="nav-item nav-link">Service</a> -->
+                <a href="{{ url_for('chat', id=id) }}" class="nav-item nav-link">Chat</a>
+                <a href="{{ url_for('try_chat') }}" class="nav-item nav-link active">New Chat</a>
+            </div>
+            <a href="{{ url_for('logout') }}" class="btn btn-primary py-2 px-4 d-none d-lg-block">Logout</a>
+        </div>
+    </nav>
+</div>
+<!-- Navbar End -->
+
+<!-- Header Start -->
+<div class="jumbotron jumbotron-fluid mb-5">
+    <div class="container text-center py-5">
+        <h1 class="text-white display-3">Chat</h1>
+        <div class="d-inline-flex align-items-center text-white">
+            <p class="m-0"><a class="text-white" href="">Home</a></p>
+            <i class="fa fa-circle px-3"></i>
+            <p class="m-0">Chat Support</p>
+        </div>
+    </div>
+</div>
+
+<!-- Header End -->
+
+<!-- chatting start -->
+
+<section style="background-color: #eee;">
+  <div class="container py-5">
+
+    <div class="row">
+
+      <div class="col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0">
+
+        <h5 class="font-weight-bold mb-3 text-center text-lg-start">Member</h5>
+
+        <div class="card">
+          <div class="card-body">
+
+            <ul class="list-unstyled mb-0">
+              <li class="p-2 border-bottom" style="background-color: #eee;">
+                <a href="#!" class="d-flex justify-content-between">
+                  <div class="d-flex flex-row">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-8.webp" alt="avatar"
+                      class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60">
+                    <div class="pt-1">
+                      <p class="fw-bold mb-0">John Doe</p>
+                      <p class="small text-muted">Hello, Are you there?</p>
+                    </div>
+                  </div>
+                  <div class="pt-1">
+                    <p class="small text-muted mb-1">Just now</p>
+                    <span class="badge bg-danger float-end">1</span>
+                  </div>
+                </a>
+              </li>
+              <li class="p-2 border-bottom">
+                <a href="#!" class="d-flex justify-content-between">
+                  <div class="d-flex flex-row">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-1.webp" alt="avatar"
+                      class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60">
+                    <div class="pt-1">
+                      <p class="fw-bold mb-0">Danny Smith</p>
+                      <p class="small text-muted">Lorem ipsum dolor sit.</p>
+                    </div>
+                  </div>
+                  <div class="pt-1">
+                    <p class="small text-muted mb-1">5 mins ago</p>
+                  </div>
+                </a>
+              </li>
+              <li class="p-2 border-bottom">
+                <a href="#!" class="d-flex justify-content-between">
+                  <div class="d-flex flex-row">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-2.webp" alt="avatar"
+                      class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60">
+                    <div class="pt-1">
+                      <p class="fw-bold mb-0">Alex Steward</p>
+                      <p class="small text-muted">Lorem ipsum dolor sit.</p>
+                    </div>
+                  </div>
+                  <div class="pt-1">
+                    <p class="small text-muted mb-1">Yesterday</p>
+                  </div>
+                </a>
+              </li>
+              <li class="p-2">
+                <a href="#!" class="d-flex justify-content-between">
+                  <div class="d-flex flex-row">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp" alt="avatar"
+                      class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60">
+                    <div class="pt-1">
+                      <p class="fw-bold mb-0">Brad Pitt</p>
+                      <p class="small text-muted">Lorem ipsum dolor sit.</p>
+                    </div>
+                  </div>
+                  <div class="pt-1">
+                    <p class="small text-muted mb-1">5 mins ago</p>
+                    <span class="text-muted float-end"><i class="fas fa-check" aria-hidden="true"></i></span>
+                  </div>
+                </a>
+              </li>
+            </ul>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- og chatting -->
+
+      <div class="col-md-6 col-lg-7 col-xl-8" id="send_room" style="height: 50vh; overflow-y: scroll;">
+        <ul class="list-unstyled">
+        </ul>
+      </div>
+      <div class="col-md-6 col-lg-7 col-xl-8">
+        <div class="bg-white mb-3">
+          <div class="form-outline">
+            <textarea class="form-control" id="textAreaExample2" rows="4"></textarea>
+            <label class="form-label" for="textAreaExample2">Message</label>
+          </div>
+        </div>
+        <button type="button" id="send_message" class="btn btn-info btn-rounded float-end">Send</button>
+        <button type="button" id="disconnect" class="btn btn-danger btn-rounded float-end me-2">Disconnect</button>
+      </div>      
+    
+  </div>
+</section>
+
+  <!-- chatting end -->
+
+<!-- Footer Start -->
+<div class="container-fluid bg-dark text-white mt-5 py-5 px-sm-3 px-md-5">
+    <div class="row pt-5">
+        <div class="col-lg-7 col-md-6">
+            <div class="row">
+                <div class="col-md-6 mb-5">
+                    <h3 class="text-primary mb-4">Get In Touch</h3>
+                    <p><i class="fa fa-map-marker-alt mr-2"></i>Location, City, Country</p>
+                    <p><i class="fa fa-phone-alt mr-2"></i>+012 345 67890</p>
+                    <p><i class="fa fa-envelope mr-2"></i>info@example.com</p>
+                    <div class="d-flex justify-content-start mt-4">
+                        <a class="btn btn-outline-light btn-social mr-2" href="#"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light btn-social mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <h3 class="text-primary mb-4">Quick Links</h3>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                        <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>About Us</a>
+                        <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Services</a>
+                        <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Pricing Plan</a>
+                        <a class="text-white" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5 col-md-6 mb-5">
+            <h3 class="text-primary mb-4">Newsletter</h3>
+            <p>Rebum labore lorem dolores kasd est, et ipsum amet et at kasd, ipsum sea tempor magna tempor. Accu kasd sed ea duo ipsum. Dolor duo eirmod sea justo no lorem est diam</p>
+            <div class="w-100">
+                <div class="input-group">
+                    <input type="text" class="form-control border-light" style="padding: 30px;" placeholder="Your Email Address">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary px-4">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid bg-dark text-white border-top py-4 px-sm-3 px-md-5" style="border-color: #3E3E4E !important;">
+    <div class="row">
+        <div class="col-lg-6 text-center text-md-left mb-3 mb-md-0">
+            <p class="m-0 text-white">&copy; <a href="#">Your Site Name</a>. All Rights Reserved. 
+            
+            
+            Designed by <a href="https://freewebsitecode.com">Free Website Code</a>
+            </p>
+        </div>
+        <div class="col-lg-6 text-center text-md-right">
+            <ul class="nav d-inline-flex">
+                <li class="nav-item">
+                    <a class="nav-link text-white py-0" href="#">Privacy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white py-0" href="#">Terms</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white py-0" href="#">FAQs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white py-0" href="#">Help</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Footer End -->
+
+<!-- Back to Top -->
+<a href="#" class="btn btn-lg btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+</body>
+</html>

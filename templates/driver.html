@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> Index </title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">  
+        {{ "decoupled-map"|googlemap_js(lat=lat, lng=long) }} {{ map.js }}                   
+    </head>
+    <body></br></br></br></br></br>
+        <div align="center">
+          <div align="center" class="border">
+                {{driver.name}} ID: {{driver.id}}</br></br>  
+                {{ map.html }} </br></br>
+                {% for order in orders %}
+                    Order Number: {{order.order_id}} Tracking ID: {{order.tracking_id}} Current Status: {{order.order_status}}
+                    Current Location: {{order.from_city}}, {{order.from_state}} </br></br>
+                {% endfor %} 
+                </br></br>
+                <a href="{{ url_for('drivers') }}" class="btn">Return to Search</a>
+                </br></br>
+                <a href="{{ url_for('home') }}" class="btn">Return Home</a>
+                </br></br>
+                <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+                </br></br>
+                
+          </div>
+        </div>
+    </body>
+</html>
