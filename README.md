@@ -59,8 +59,5 @@ Knock is a real-time carrier price comparison platform that helps users find the
 - **Mobile App Development:**  
   Expanding the platform’s functionality to mobile devices for a broader user base.
 
-## **Contributors**
-- **Chiranthan Shadaksharaswamy**  
-  Software Engineer Lead
-  [LinkedIn](https://www.linkedin.com/in/chiranthan-shadaksharaswamy) | [GitHub](https://github.com/ChiranthanS)
+
 
